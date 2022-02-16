@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/movie.michaelsault.ca/static/css/main.af5bdad6.css",
-    "main.js": "/movie.michaelsault.ca/static/js/main.1a202255.js",
+    "main.js": "/movie.michaelsault.ca/static/js/main.f3e8e16a.js",
     "static/js/787.a3f60608.chunk.js": "/movie.michaelsault.ca/static/js/787.a3f60608.chunk.js",
     "index.html": "/movie.michaelsault.ca/index.html",
     "main.af5bdad6.css.map": "/movie.michaelsault.ca/static/css/main.af5bdad6.css.map",
-    "main.1a202255.js.map": "/movie.michaelsault.ca/static/js/main.1a202255.js.map",
+    "main.f3e8e16a.js.map": "/movie.michaelsault.ca/static/js/main.f3e8e16a.js.map",
     "787.a3f60608.chunk.js.map": "/movie.michaelsault.ca/static/js/787.a3f60608.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.af5bdad6.css",
-    "static/js/main.1a202255.js"
+    "static/js/main.f3e8e16a.js"
   ]
 }
