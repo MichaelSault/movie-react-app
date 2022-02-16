@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/movie.michaelsault.ca/static/css/main.af5bdad6.css",
-    "main.js": "/movie.michaelsault.ca/static/js/main.f3e8e16a.js",
+    "main.css": "/movie.michaelsault.ca/static/css/main.a91d00e0.css",
+    "main.js": "/movie.michaelsault.ca/static/js/main.bb9db04c.js",
     "static/js/787.a3f60608.chunk.js": "/movie.michaelsault.ca/static/js/787.a3f60608.chunk.js",
     "index.html": "/movie.michaelsault.ca/index.html",
-    "main.af5bdad6.css.map": "/movie.michaelsault.ca/static/css/main.af5bdad6.css.map",
-    "main.f3e8e16a.js.map": "/movie.michaelsault.ca/static/js/main.f3e8e16a.js.map",
+    "main.a91d00e0.css.map": "/movie.michaelsault.ca/static/css/main.a91d00e0.css.map",
+    "main.bb9db04c.js.map": "/movie.michaelsault.ca/static/js/main.bb9db04c.js.map",
     "787.a3f60608.chunk.js.map": "/movie.michaelsault.ca/static/js/787.a3f60608.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.af5bdad6.css",
-    "static/js/main.f3e8e16a.js"
+    "static/css/main.a91d00e0.css",
+    "static/js/main.bb9db04c.js"
   ]
 }
