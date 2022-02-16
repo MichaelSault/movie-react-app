@@ -108,7 +108,7 @@ function App() {
         <div className="auth-inner">
           <header className={"header"}>
             <div className={"header-content max-center"}>
-              <span>Movie Database</span>
+              <h5>Movie Database</h5>
 
               <form onSubmit={searchMovies}>
                 <input className="small" type ='text' onChange={(e) => setSearchKey(e.target.value)}/>
@@ -122,8 +122,8 @@ function App() {
             <div className="hero-content max-center" >
                 {playTrailer ? <button className={"hero-button button-close"} onClick = {() => setPlayTrailer(false)}>Close</button> : null}
                 {selectedMovie.videos && playTrailer ? renderTrailer() : null}
-                {hasTrailer ?
-                  <button className={"hero-button"} onClick = {() => setPlayTrailer(true)}>Play Trailer</button>
+                {hasTrailer && !playTrailer ?
+                  <button className={"hero-button trailer-button"} onClick = {() => setPlayTrailer(true)}>Trailer</button>
                 : null }
               <h1 className={"hero-title"}>{selectedMovie.title}</h1>
               {selectedMovie.overview ? <p className={"hero-overview"}>{selectedMovie.overview}</p> : null}

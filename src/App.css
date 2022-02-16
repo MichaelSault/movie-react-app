@@ -38,6 +38,10 @@
     width: 100%;
     min-width: 130px;
   }
+
+  .hero-title {
+    font-size: 72px;
+  }
 }
 
 @media only screen and (min-width: 601px) and (max-width: 800px) {
@@ -56,6 +60,10 @@
   .movie-cover {
     width: 100%;
     min-width: 130px;
+  }
+
+  .hero-title {
+    font-size: 45px;
   }
 }
 
@@ -76,6 +84,10 @@
     width: 100%;
     min-width: 130px;
   }
+
+  .hero-title {
+    font-size: 35px;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -94,6 +106,10 @@
   .movie-cover {
     width: 100%;
     min-width: 130px;
+  }
+
+  .hero-title {
+    font-size: 30px;
   }
 }
 
@@ -140,10 +156,7 @@
   align-items: flex-end;
   padding-bottom: 1%;
   margin-bottom: 15px;
-}
-
-.hero-title {
-  font-size: 72px;
+  margin-top: 5px;
 }
 
 .hero-button {
@@ -158,11 +171,15 @@
   padding-bottom: 60px;
 }
 
+.trailer-button {
+  bottom: 25px;
+  position: absolute;
+}
+
 .button-close {
   position: absolute;
   z-index: 10;
   bottom: 25px;
-  left: 25px;
 }
 
 .youtube-container {
