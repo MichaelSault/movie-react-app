@@ -100,7 +100,11 @@ input-div {
 }
 
 .small {
-  width: 70%;
+  width: 135px;
   height: 34px;
 }
 
+.searchBy {
+  width: 56px;
+  height: 34px;
+}
