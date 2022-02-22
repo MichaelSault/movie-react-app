@@ -60,6 +60,7 @@
   .movie-cover {
     width: 100%;
     min-width: 130px;
+    
   }
 
   .hero-title {
@@ -199,9 +200,30 @@
   bottom: 0;
 }
 
-form {
+.search-form {
   min-width: 255px;
   display: flex;
   align-items: flex-end;
   justify-content: right;
+}
+
+.align_right {
+  text-align: right;
+  color: #000000;
+}
+
+.moviedb {
+  color: #000000;
+  text-decoration: none;
+}
+
+.actor-website-button {
+  width: auto;
+}
+
+.button-form {
+  min-width: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }

@@ -18,12 +18,13 @@ function App() {
   const [hasTrailer, setHasTrailer] = useState(false)
   const [sortBy, setSortBy] = useState("")
   const [contentType, setContentType] = useState("movie")
+  const [searchType, setSearchType] = useState("")
 
   const fetchMovies = async (searchKey) => {
     console.log(contentType)
     const type = searchKey ? "/search" : sortBy === 'trending' ? '/trending' : !sortBy ? "/discover" : ''
     const movieStatus = sortBy === 'trending' ? 'week' : sortBy === 'now_playing' ? contentType === 'tv' ? 'airing_today' : sortBy : sortBy === 'upcoming' ? contentType === 'tv' ? 'on_the_air' : sortBy : ''
-    const {data: {results}} = await axios.get( `${API_URL}${type}/${contentType}/${movieStatus}`,
+    const {data: {results}} = await axios.get( `${API_URL}${type}/${searchType ? searchType : contentType}${searchType ? '' : '/'+movieStatus}`,
     {
         params: {
             api_key: process.env.REACT_APP_MOVIE_API_KEY,
@@ -37,7 +38,8 @@ function App() {
   }
 
   const fetchMovie = async (id) => {
-    const {data} = await axios.get(`${API_URL}/${contentType}/${id}`, {
+    const mediaType = searchType ? searchType : contentType
+    const {data} = await axios.get(`${API_URL}/${mediaType}/${id}`, {
       params: {
         api_key: process.env.REACT_APP_MOVIE_API_KEY,
         append_to_response: "videos"
@@ -65,6 +67,7 @@ function App() {
         key={movie.id}
         movie={movie}
         selectMovie={selectMovie}
+        contentType={contentType}
       />
     ))
   )
@@ -82,6 +85,12 @@ function App() {
   const resetSearch = () => {
     setSearchKey("")
     document.getElementById('searchBox').value = ''
+    resetSearchType()
+  }
+
+  const resetSearchType = () => {
+    setSearchType("")
+    document.getElementById('searchBy').value = ''
   }
 
   const renderTrailer = () => {
@@ -121,8 +130,8 @@ function App() {
           <header className={"header"}>
             <div className={"header-content max-center col-xlg-2"}>
               <div className="filter-buttons">
-                <form onSubmit={searchMovies}>
-                  {contentType === 'movie' ? <button className={"hero-button sort-button"} type={"submit"} onClick = {() => {setContentType('tv')}}>TV Shows</button> : <button className={"hero-button sort-button"} type={"submit"} onClick = {() => {setContentType('movie')}}>Movies</button>}
+                <form className="button-form" onSubmit={searchMovies}>
+                  {contentType === 'movie' ? <button className={"hero-button sort-button"} type={"submit"} onClick = {() => {setContentType('tv'); resetSearchType();}}>TV Shows</button> : <button className={"hero-button sort-button"} type={"submit"} onClick = {() => {setContentType('movie'); resetSearchType();}}>Movies</button>}
                   <button className={"hero-button sort-button"} onClick = {() => {setSortBy(''); resetSearch();} }>Discover</button>
                   <button className={"hero-button sort-button"} onClick = {() => {setSortBy('upcoming'); resetSearch();}}>{contentType === 'movie' ? 'Upcoming' : 'On the Air'}</button>
                   <button className={"hero-button sort-button"} onClick = {() => {setSortBy('now_playing'); resetSearch();}}>{contentType === 'movie' ? 'Out Now' : 'On Today'}</button>
@@ -130,13 +139,13 @@ function App() {
                 </form>
               </div>
               
-              <form onSubmit={searchMovies}>
-                {/* <select className="searchBy" id='searchBy' name='searchBy'>
-                  <option value="name">Title</option>
-                  <option value="actor">Actor</option>
-                  <option value="genre">Genre</option>
-                  <option value="tags">Tags</option>
-                </select> */}
+              <form className="search-form" onSubmit={searchMovies}>
+                <select className="searchBy" id='searchBy' name='searchBy' onChange={(e) => {setSearchType(e.target.value)}}>
+                  <option value="">Title</option>
+                  <option value="person">Actor</option>
+                  <option value="company">Studio</option>
+                  <option value="keyword">Keyword</option>
+                </select>
                 <input id='searchBox' className="small" type ='text' onChange={(e) => {setSearchKey(e.target.value); setSortBy("");}}/>
                 <button className={"hero-button search-button"} type={"submit"}>Search!</button>
               </form>
@@ -144,14 +153,17 @@ function App() {
           </header>
 
 
-          <div className="hero" style={{backgroundImage: `URL('${BACKDROP_PATH}${selectedMovie.backdrop_path}')`}}>
+          <div className="hero" style={{backgroundImage: `URL('${BACKDROP_PATH}${selectedMovie.backdrop_path || selectedMovie.profile_path || selectedMovie.logo_path}')`}}>
             <div className="hero-content max-center" >
               {playTrailer ? <button className={"hero-button button-close"} onClick = {() => setPlayTrailer(false)}>Close</button> : null}
               {selectedMovie.videos && playTrailer ? renderTrailer() : null}
-              <h1 className={"hero-title"}>{selectedMovie.title}{selectedMovie.name}</h1>
-              {selectedMovie.overview ? <p className={"hero-overview"}>{selectedMovie.overview}</p> : null}
-
-              {hasTrailer && !playTrailer ?
+              <h1 className={"hero-title"}>{selectedMovie.title||selectedMovie.name}</h1>
+              {selectedMovie.overview||selectedMovie.biography ? <p className={"hero-overview"}>{selectedMovie.overview||selectedMovie.biography}</p> : null}
+              <p>{selectedMovie.headquarters}{selectedMovie.birthday ? 'DOB: ' + selectedMovie.birthday : null}</p><p>{selectedMovie.place_of_birth ? 'Hometown: ' + selectedMovie.place_of_birth : null}</p>
+              
+              {!selectedMovie.videos  && selectedMovie.homepage ? <a href={selectedMovie.homepage} target='blank'><button className="actor-website-button">Official Website</button></a>:null} 
+              
+              {hasTrailer && !playTrailer && selectedMovie.videos?
                 <button className={"hero-button trailer-button"} onClick = {() => setPlayTrailer(true)}>Trailer</button>
               : null }
     
@@ -165,6 +177,8 @@ function App() {
           <div className="container max-center">
             {renderMovies()}
           </div>
+          <br/><br/>
+          <div className='align_right'><b><i><a href='https://www.themoviedb.org/' target='_blank' rel="noreferrer" className="moviedb">This product uses the TMDB API but is not endorsed or certified by TMDB.</a></i></b></div>
         </div>
       </div>
     </div>
